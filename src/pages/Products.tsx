@@ -1,19 +1,23 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, Sparkles, ArrowRight } from "lucide-react";
+import {
+  Check,
+  ArrowRight,
+  Hammer,
+  ShieldCheck,
+  Wind,
+  Sprout,
+  Droplets,
+  Package,
+  Leaf,
+  Award
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { Seo } from "../components/Seo";
-import {
-  PageShell,
-  SectionHeading,
-  Eyebrow,
-  CtaLink,
-  RevealOnScroll,
-  ParallaxImage,
-  GoldDivider,
-  Marquee,
-  Bottle
-} from "../components/ui";
+import { PageShell, RevealOnScroll, GoldDivider, CtaLink } from "../components/ui";
 import { products } from "../data/site";
+
+const ease = [0.16, 1, 0.3, 1] as const;
 
 const productImages: Record<string, string> = {
   "groundnut-oil": "/images/groundnut-oil.png",
@@ -22,30 +26,65 @@ const productImages: Record<string, string> = {
   "castor-oil": "/images/hero-bottle.png"
 };
 
-const productStories: Record<string, { tagline: string; story: string; scene: string }> = {
+const productMeta: Record<string, { tagline: string; idealFor: string; aroma: string; storage: string }> = {
   "groundnut-oil": {
     tagline: "The soul of Indian kitchens",
-    story: "Imagine the aroma of freshly pressed groundnuts filling your kitchen at dawn. This is the oil that generations of families have trusted for their most cherished recipes — from festival sweets to everyday gravies.",
-    scene: "Freshly harvested groundnuts, warm sunlight, golden aroma"
+    idealFor: "Everyday frying, gravies & festive cooking",
+    aroma: "Warm, nutty & deeply golden",
+    storage: "Store cool & dark; seal the cap after each use"
   },
   "sesame-oil": {
     tagline: "Heritage in every drop",
-    story: "In South Indian tradition, sesame oil is more than an ingredient — it's a ritual. Used in temple cooking, traditional massage, and the most authentic pickles, its bold nutty profile carries centuries of wisdom.",
-    scene: "White sesame seeds, dark stone, ancient tradition"
+    idealFor: "Pickles, tempering & wellness rituals",
+    aroma: "Bold, toasty & earthy",
+    storage: "Keep away from heat & direct sunlight"
   },
   "coconut-oil": {
     tagline: "Nature's gentle versatility",
-    story: "From the tropical groves of South India comes an oil that nourishes everything it touches. Whether it's a Kerala curry, a morning hair ritual, or gentle skin care — coconut oil is the family's most versatile companion.",
-    scene: "Fresh coconuts, tropical leaves, morning light"
+    idealFor: "Regional cooking, hair & skin care",
+    aroma: "Mellow, sweet & tropical",
+    storage: "Room temperature; may solidify when cool"
   },
   "castor-oil": {
     tagline: "The ancient wellness elixir",
-    story: "Dense, pure, and deeply traditional. Castor oil has been a cornerstone of Indian home remedies for centuries. Every drop is crafted without shortcuts — thick, honest, and ready for your family's wellness rituals.",
-    scene: "Dark botanical setting, traditional wellness"
+    idealFor: "Hair care, massage & home wellness",
+    aroma: "Mild, clean & botanical",
+    storage: "Keep tightly sealed, cool & dry"
   }
 };
 
+const categories = [
+  { label: "All Products", slug: "all" },
+  { label: "Groundnut Oil", slug: "groundnut-oil" },
+  { label: "Sesame Oil", slug: "sesame-oil" },
+  { label: "Coconut Oil", slug: "coconut-oil" },
+  { label: "Castor Oil", slug: "castor-oil" }
+];
+
+const cardBadges = ["Cold Pressed", "100% Natural", "Wooden Chekku", "Chemical Free"];
+
+const highlights = [
+  { icon: Hammer, label: "Traditional Wooden Cold Pressed" },
+  { icon: ShieldCheck, label: "No Chemicals" },
+  { icon: Wind, label: "Rich Natural Aroma" },
+  { icon: Sprout, label: "Farm Fresh Seeds" },
+  { icon: Droplets, label: "Nutrient Retention" },
+  { icon: Package, label: "Small Batch Production" }
+];
+
+const trustItems = [
+  { icon: Leaf, label: "100% Natural" },
+  { icon: Droplets, label: "Cold Pressed" },
+  { icon: ShieldCheck, label: "Chemical Free" },
+  { icon: Sprout, label: "Farm Fresh" },
+  { icon: Award, label: "Premium Quality" },
+  { icon: Hammer, label: "Traditional Method" }
+];
+
 export function Products() {
+  const [active, setActive] = useState("all");
+  const filtered = active === "all" ? products : products.filter((p) => p.slug === active);
+
   const schema = products.map((product) => ({
     "@context": "https://schema.org",
     "@type": "Product",
@@ -59,165 +98,240 @@ export function Products() {
     <PageShell>
       <Seo
         title="Premium Cold Pressed Oil Collection | RMS Gold"
-        description="Explore RMS Gold's signature collection — cold pressed groundnut oil, pure sesame oil, virgin coconut oil and traditional castor oil. Each bottle is a luxury campaign."
+        description="Explore RMS Gold's signature collection — cold pressed groundnut oil, pure sesame oil, virgin coconut oil and traditional castor oil, crafted with the wooden Chekku method."
         path="/products"
         keywords={["Groundnut Oil", "Sesame Oil", "Coconut Oil", "Premium Oil Bottles", "Cold Pressed"]}
         schema={schema}
       />
 
       {/* ═══════════ HERO ═══════════ */}
-      <section className="relative min-h-[70vh] overflow-hidden bg-charcoal">
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            backgroundImage: "url(/images/oil-pour.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center"
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-charcoal/85 to-charcoal" />
-
-        <div className="container-luxury relative z-10 flex min-h-[70vh] flex-col items-center justify-center text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="eyebrow"
+      <section className="p-parchment px-4 pb-16 pt-32 text-center md:px-8 md:pb-20 md:pt-36">
+        <div className="container-luxury">
+          <motion.p
+            className="eyebrow mx-auto"
             style={{ color: "var(--gold)" }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease }}
           >
             The Collection
-          </motion.div>
+          </motion.p>
           <motion.h1
-            className="mt-6 headline-xl text-ivory"
-            initial={{ opacity: 0, y: 40 }}
+            className="mx-auto mt-7 max-w-4xl headline-xl text-forest"
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: 0.15, duration: 1, ease }}
           >
-            Four oils.
-            <br />
-            <em className="font-display italic text-gold">Each a masterpiece.</em>
+            Crafted by Tradition.{" "}
+            <em className="font-display italic text-gold">Perfected by Nature.</em>
           </motion.h1>
-          <motion.p
-            className="mt-6 body-lg-light mx-auto max-w-xl"
+          <motion.div
+            className="mt-8 flex justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
+            transition={{ delay: 0.35, duration: 0.9 }}
           >
-            Every bottle is designed to communicate purity before it is opened and
-            traditional depth after it is poured.
+            <div className="divider-gold" />
+          </motion.div>
+          <motion.p
+            className="mx-auto mt-8 max-w-2xl font-display text-lg italic leading-relaxed text-charcoal/55 md:text-xl"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45, duration: 0.8 }}
+          >
+            Every bottle of RMS Gold Cold Pressed Oil is carefully extracted using
+            traditional wooden Chekku methods, preserving nature's purity, authentic
+            flavour, and essential nutrients for generations of healthy living.
           </motion.p>
         </div>
       </section>
 
-      {/* ═══════════ PRODUCT STORIES ═══════════ */}
-      <div className="bg-ivory">
-        {products.map((product, index) => {
-          const story = productStories[product.slug];
-          const isEven = index % 2 === 0;
-
-          return (
-            <section key={product.slug} className="border-b border-forest/6">
-              {/* Fullscreen Product Image */}
-              <div className="container-luxury py-8">
-                <RevealOnScroll>
-                  <div className="relative overflow-hidden rounded-2xl">
-                    <ParallaxImage
-                      src={productImages[product.slug]}
-                      alt={product.name}
-                      className="h-[50vh] md:h-[70vh]"
-                      speed={0.15}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent" />
-
-                    {/* Overlay content */}
-                    <div className="absolute bottom-0 left-0 right-0 p-8 md:p-14">
-                      <p className="text-xs font-bold uppercase tracking-[0.4em] text-gold">
-                        0{index + 1} — {story.scene}
-                      </p>
-                      <h2 className="mt-4 headline-lg text-ivory">{product.name}</h2>
-                      <p className="mt-2 font-display text-xl italic text-ivory/60">
-                        {story.tagline}
-                      </p>
-                    </div>
-                  </div>
-                </RevealOnScroll>
-              </div>
-
-              {/* Story + Details */}
-              <div className="container-luxury py-16 md:py-24">
-                <div
-                  className={`grid items-start gap-14 lg:gap-24 ${
-                    isEven ? "lg:grid-cols-[1.2fr_1fr]" : "lg:grid-cols-[1fr_1.2fr]"
-                  }`}
+      {/* ═══════════ FILTERS + PRODUCT GRID ═══════════ */}
+      <section className="p-parchment px-4 pb-24 md:px-8">
+        <div className="container-luxury">
+          <RevealOnScroll>
+            <div className="flex flex-wrap justify-center gap-2.5" role="tablist" aria-label="Product categories">
+              {categories.map((cat) => (
+                <button
+                  key={cat.slug}
+                  type="button"
+                  role="tab"
+                  aria-selected={active === cat.slug}
+                  className={`p-filter ${active === cat.slug ? "is-active" : ""}`}
+                  onClick={() => setActive(cat.slug)}
                 >
-                  <div className={isEven ? "" : "lg:order-2"}>
-                    <RevealOnScroll>
-                      <p className="body-lg max-w-lg !text-charcoal/80 !leading-[1.9]">
-                        {story.story}
-                      </p>
-                    </RevealOnScroll>
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+          </RevealOnScroll>
 
-                    <RevealOnScroll delay={0.1}>
-                      <div className="mt-10">
-                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">
-                          Ingredients
-                        </p>
-                        <p className="mt-2 text-sm leading-7 text-charcoal/60">
-                          {product.ingredients}
-                        </p>
-                      </div>
-                    </RevealOnScroll>
-
-                    <RevealOnScroll delay={0.15}>
-                      <div className="mt-8 flex flex-wrap gap-2">
-                        {product.sizes.map((s) => (
-                          <span
-                            key={s}
-                            className="rounded-full border border-gold/20 bg-gold/5 px-5 py-2.5 text-sm font-semibold text-gold"
-                          >
-                            {s}
-                          </span>
-                        ))}
-                      </div>
-                    </RevealOnScroll>
-
-                    <RevealOnScroll delay={0.2}>
-                      <div className="mt-10">
-                        <CtaLink to="/contact">
-                          Enquire about {product.name}
-                        </CtaLink>
-                      </div>
-                    </RevealOnScroll>
+          <div
+            className={`mx-auto mt-14 grid gap-8 ${
+              filtered.length === 1 ? "max-w-xl" : "max-w-6xl lg:grid-cols-2"
+            }`}
+          >
+            {filtered.map((product, i) => {
+              const meta = productMeta[product.slug];
+              return (
+                <motion.article
+                  key={product.slug}
+                  className="p-card"
+                  initial={{ opacity: 0, y: 26 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ delay: Math.min(i * 0.08, 0.24), duration: 0.65, ease }}
+                >
+                  {/* Media */}
+                  <div className="p-card-media">
+                    <img src={productImages[product.slug]} alt={product.name} loading="lazy" />
+                    <motion.span
+                      className="p-float-badge"
+                      animate={{ y: [0, -5, 0] }}
+                      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      <span className="h-1.5 w-1.5 rounded-full bg-gold" />
+                      Cold Pressed
+                    </motion.span>
                   </div>
 
-                  <div className={isEven ? "" : "lg:order-1"}>
-                    <div className="grid gap-5 sm:grid-cols-3">
-                      <InfoCard
-                        icon={<Sparkles className="text-gold" size={20} />}
-                        title="Health Benefits"
-                        items={product.benefits}
-                        delay={0}
-                      />
-                      <InfoCard
-                        icon={<Check className="text-gold" size={20} />}
-                        title="Best Uses"
-                        items={product.uses}
-                        delay={0.05}
-                      />
-                      <InfoCard
-                        icon={<Sparkles className="text-gold" size={20} />}
-                        title="Nutrition"
-                        items={product.nutrition}
-                        delay={0.1}
-                      />
+                  {/* Body */}
+                  <div className="flex flex-1 flex-col gap-6 p-6 md:p-8">
+                    {/* Header */}
+                    <div>
+                      <p className="text-[0.62rem] font-bold uppercase tracking-[0.24em] text-gold/80">
+                        0{i + 1} · Signature Oil
+                      </p>
+                      <h2 className="mt-2.5 font-serif text-2xl leading-tight text-forest md:text-[1.7rem]">
+                        {product.name}
+                      </h2>
+                      <p className="mt-1.5 font-display text-base italic text-charcoal/45">
+                        {meta.tagline}
+                      </p>
+                      <p className="mt-4 text-sm leading-7 text-charcoal/60">
+                        {product.summary}
+                      </p>
+                    </div>
+
+                    {/* Sizes */}
+                    <div className="flex flex-wrap gap-2">
+                      {product.sizes.map((s) => (
+                        <span
+                          key={s}
+                          className="rounded-full border border-gold/20 bg-gold/5 px-3.5 py-1.5 text-xs font-semibold text-gold"
+                        >
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Badges */}
+                    <div className="flex flex-wrap gap-2">
+                      {cardBadges.map((b) => (
+                        <span key={b} className="p-badge">
+                          <Check size={11} />
+                          {b}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="divider-gold-wide" />
+
+                    {/* Key Benefits */}
+                    <div>
+                      <p className="p-detail-label">Key Benefits</p>
+                      <ul className="mt-3 space-y-2">
+                        {product.benefits.map((benefit) => (
+                          <li key={benefit} className="flex gap-2.5 text-sm leading-6 text-charcoal/60">
+                            <Check className="mt-0.5 shrink-0 text-olive" size={14} />
+                            {benefit}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Highlight chips */}
+                    <div className="flex flex-wrap gap-2">
+                      {highlights.map((h) => (
+                        <span key={h.label} className="p-chip">
+                          <h.icon size={13} />
+                          {h.label}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="divider-gold-wide" />
+
+                    {/* Detail preview */}
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                      <div className="p-detail">
+                        <p className="p-detail-label">Ideal For</p>
+                        <p className="p-detail-text">{meta.idealFor}</p>
+                      </div>
+                      <div className="p-detail">
+                        <p className="p-detail-label">Best Uses</p>
+                        <p className="p-detail-text">{product.uses.slice(0, 3).join(" · ")}</p>
+                      </div>
+                      <div className="p-detail">
+                        <p className="p-detail-label">Aroma Profile</p>
+                        <p className="p-detail-text">{meta.aroma}</p>
+                      </div>
+                      <div className="p-detail">
+                        <p className="p-detail-label">Storage Advice</p>
+                        <p className="p-detail-text">{meta.storage}</p>
+                      </div>
+                    </div>
+
+                    {/* CTA */}
+                    <div className="mt-auto pt-1">
+                      <Link
+                        to="/contact"
+                        className="magnetic-btn magnetic-btn-gold w-full"
+                        aria-label={`Explore ${product.name}`}
+                      >
+                        Explore Product
+                        <ArrowRight size={15} />
+                      </Link>
                     </div>
                   </div>
+                </motion.article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════ TRUST STRIP ═══════════ */}
+      <section className="section-luxury section-cream">
+        <div className="container-luxury">
+          <div className="mx-auto max-w-2xl text-center">
+            <RevealOnScroll>
+              <p className="eyebrow justify-center">Our Promise</p>
+            </RevealOnScroll>
+            <RevealOnScroll delay={0.08}>
+              <h2 className="mt-5 headline-md text-forest">
+                Held to a{" "}
+                <em className="font-display italic text-gold">higher standard.</em>
+              </h2>
+            </RevealOnScroll>
+          </div>
+
+          <div className="mx-auto mt-16 grid max-w-5xl grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-6">
+            {trustItems.map((item, i) => (
+              <RevealOnScroll key={item.label} delay={i * 0.06}>
+                <div className="p-trust">
+                  <div className="p-trust-icon">
+                    <item.icon size={22} />
+                  </div>
+                  <p className="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-forest">
+                    {item.label}
+                  </p>
                 </div>
-              </div>
-            </section>
-          );
-        })}
-      </div>
+              </RevealOnScroll>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ═══════════ CTA ═══════════ */}
       <section className="section-dark section-luxury">
@@ -248,36 +362,5 @@ export function Products() {
         </div>
       </section>
     </PageShell>
-  );
-}
-
-function InfoCard({
-  icon,
-  title,
-  items,
-  delay
-}: {
-  icon: React.ReactNode;
-  title: string;
-  items: string[];
-  delay: number;
-}) {
-  return (
-    <RevealOnScroll delay={delay}>
-      <div className="premium-card !rounded-2xl p-6">
-        {icon}
-        <h3 className="mt-4 text-sm font-bold uppercase tracking-wider text-forest">
-          {title}
-        </h3>
-        <ul className="mt-4 space-y-2.5">
-          {items.map((item) => (
-            <li key={item} className="flex gap-2 text-sm leading-6 text-charcoal/55">
-              <Check className="mt-0.5 shrink-0 text-olive" size={14} />
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </RevealOnScroll>
   );
 }

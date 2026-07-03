@@ -1,16 +1,10 @@
 import {
   Award,
   Beaker,
-  CookingPot,
-  Factory,
   HeartPulse,
-  Leaf,
-  PackageCheck,
   ShieldCheck,
   Sprout,
-  Star,
-  Trees,
-  Truck
+  Trees
 } from "lucide-react";
 import type { BlogPost, Feature, Product } from "../types";
 
@@ -19,7 +13,6 @@ export const baseUrl = "https://rmsgold.example.com";
 export const navLinks = [
   ["Products", "/products"],
   ["Story", "/our-story"],
-  ["Journey", "/manufacturing-journey"],
   ["Wellness", "/health-wellness"],
   ["Gallery", "/gallery"],
   ["Blog", "/blog"],
@@ -80,17 +73,6 @@ export const features: Feature[] = [
   { title: "Farm Fresh Seeds", copy: "Selected seeds are cleaned, inspected and pressed for consistency.", Icon: Sprout },
   { title: "Healthy Cooking", copy: "A natural choice for families returning to traditional Indian nutrition.", Icon: HeartPulse },
   { title: "Premium Standards", copy: "Every batch is filtered, tested, bottled and sealed with discipline.", Icon: Award }
-];
-
-export const journey = [
-  { title: "Seed Selection", copy: "Only clean, mature and aroma-rich seeds enter the mill.", Icon: Sprout },
-  { title: "Cleaning", copy: "Dust, stones and impurities are removed before pressing.", Icon: ShieldCheck },
-  { title: "Cold Pressing", copy: "The oil is extracted slowly to avoid heat damage.", Icon: Factory },
-  { title: "Natural Filtration", copy: "Sediments settle naturally for a clear, honest finish.", Icon: Leaf },
-  { title: "Quality Testing", copy: "Color, fragrance, clarity and batch quality are checked.", Icon: Star },
-  { title: "Bottling", copy: "Food-grade bottles protect freshness and shelf appeal.", Icon: PackageCheck },
-  { title: "Packaging", copy: "Elegant labeling gives every bottle a premium shelf presence.", Icon: CookingPot },
-  { title: "Delivery", copy: "Orders are prepared for homes, retailers and bulk buyers.", Icon: Truck }
 ];
 
 export const reviews = [

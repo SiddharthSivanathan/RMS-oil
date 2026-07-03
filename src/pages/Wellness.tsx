@@ -1,277 +1,290 @@
 import { motion } from "framer-motion";
-import { HeartPulse, Leaf, Sun, Droplets, Brain, Shield } from "lucide-react";
+import {
+  Hammer,
+  ShieldCheck,
+  Leaf,
+  Sprout,
+  PackageCheck,
+  Users,
+  Check,
+  X
+} from "lucide-react";
 import { Seo } from "../components/Seo";
 import {
   PageShell,
-  SectionHeading,
   RevealOnScroll,
   GoldDivider,
-  CtaLink,
-  Eyebrow,
-  ParallaxImage,
-  GlassCard
+  CtaLink
 } from "../components/ui";
 
-const benefits = [
+const reasons = [
   {
-    icon: HeartPulse,
-    title: "Heart-Friendly Fats",
-    copy: "Cold pressed oils are naturally rich in monounsaturated and polyunsaturated fats, which support cardiovascular wellness as part of a balanced diet."
+    icon: Hammer,
+    title: "Traditional Wooden Cold Press",
+    copy: "Every seed is pressed slowly in a wooden ghani, without heat or haste. This unhurried extraction protects the delicate nutrients and authentic flavour that speed and machinery destroy."
   },
   {
-    icon: Shield,
-    title: "Natural Antioxidants",
-    copy: "Without excessive heat processing, cold pressed oils retain vitamin E, sesamol, and other naturally occurring antioxidants."
+    icon: ShieldCheck,
+    title: "100% Pure & Chemical-Free",
+    copy: "No refining, no bleaching, no deodorising. No preservatives or artificial additives of any kind — only honest oil, exactly as nature intended it to be."
   },
   {
     icon: Leaf,
-    title: "Chemical Free",
-    copy: "No solvents, no bleaching, no artificial preservatives. Just pure oil extracted by mechanical pressure."
+    title: "Rich in Natural Nutrients",
+    copy: "Because we never over-process, our oils keep their naturally occurring antioxidants, vitamins, and healthy fats — the quiet nourishment refining strips away."
   },
   {
-    icon: Sun,
-    title: "Natural Aroma & Color",
-    copy: "The slow extraction process preserves the distinctive aroma and rich golden color that refined oils lose."
+    icon: Sprout,
+    title: "Farm to Bottle Quality",
+    copy: "We responsibly source seeds from trusted growers and follow strict quality checks at every stage — from field to press to the bottle on your table."
   },
   {
-    icon: Droplets,
-    title: "Better Nutrient Retention",
-    copy: "Low-temperature pressing helps preserve essential fatty acids, vitamins, and minerals in their natural form."
+    icon: PackageCheck,
+    title: "Freshly Produced in Small Batches",
+    copy: "We choose freshness over volume. Each small batch is pressed, filtered, and bottled with care, so every drop reaches you with its full aroma intact."
   },
   {
-    icon: Brain,
-    title: "Traditional Wisdom",
-    copy: "Ayurvedic and traditional Indian nutrition have valued cold pressed oils for their balancing, nourishing properties for centuries."
+    icon: Users,
+    title: "Trusted by Thousands of Families",
+    copy: "Consistency, authenticity, and heritage have earned us a place in kitchens across generations — a trust we honour with every single bottle."
   }
 ];
 
-const oilGuide = [
-  {
-    oil: "Groundnut Oil",
-    best: "Everyday cooking, frying, gravies",
-    ayurveda: "Warming, grounding",
-    nutrition: "Vitamin E, healthy fats"
-  },
-  {
-    oil: "Sesame Oil",
-    best: "Pickles, tempering, massage",
-    ayurveda: "Balancing, strengthening",
-    nutrition: "Sesamol, Vitamin K, lignans"
-  },
-  {
-    oil: "Coconut Oil",
-    best: "Regional cooking, hair & skin care",
-    ayurveda: "Cooling, nourishing",
-    nutrition: "MCTs, lauric acid"
-  },
-  {
-    oil: "Castor Oil",
-    best: "Hair care, massage, wellness",
-    ayurveda: "Cleansing, lubricating",
-    nutrition: "Ricinoleic acid, fatty acids"
-  }
+const comparison = [
+  ["Extraction Method", "Traditional wooden press", "Chemical solvent extraction"],
+  ["Heat Used", "None — truly cold pressed", "High-heat processing"],
+  ["Nutrient Retention", "Fully preserved", "Largely stripped away"],
+  ["Natural Aroma", "Rich & authentic", "Neutralised & deodorised"],
+  ["Chemical Processing", "None whatsoever", "Bleached & refined"],
+  ["Shelf Quality", "Fresh, small-batch", "Mass-produced, long-stored"],
+  ["Taste", "Pure & full-bodied", "Flat & characterless"],
+  ["Purity", "100% natural", "Additives & preservatives"]
+];
+
+const trustBadges = [
+  "100% Natural",
+  "Cold Pressed",
+  "Chemical Free",
+  "Premium Quality",
+  "Farm Fresh",
+  "Traditional Method"
 ];
 
 export function Wellness() {
   return (
     <PageShell>
       <Seo
-        title="Health & Wellness | RMS Gold — Benefits of Cold Pressed Oils"
-        description="Discover the health benefits of cold pressed oils — natural antioxidants, heart-friendly fats, chemical-free processing, and Ayurvedic wellness traditions."
+        title="Why Choose RMS Gold | Pure Cold Pressed Oils You Can Trust"
+        description="Discover why families trust RMS Gold — traditional wooden cold-press extraction, 100% chemical-free purity, natural nutrients, farm-to-bottle quality, and small-batch freshness."
         path="/health-wellness"
-        keywords={["Health Benefits Oil", "Cold Pressed Oil Benefits", "Ayurveda Oil", "Natural Cooking Oil"]}
+        keywords={["Cold Pressed Oil Benefits", "Chemical Free Oil", "Wood Pressed Oil", "Pure Natural Cooking Oil"]}
       />
 
-      {/* ═══════════ HERO ═══════════ */}
-      <section className="relative min-h-[70vh] overflow-hidden bg-charcoal">
+      {/* ═══════════ HERO / HEADING ═══════════ */}
+      <section className="relative overflow-hidden bg-charcoal py-28 md:py-36">
         <div
-          className="absolute inset-0 opacity-20"
+          className="absolute inset-0 opacity-[0.14]"
           style={{
-            backgroundImage: "url(/images/coconut-oil.png)",
+            backgroundImage: "url(/images/wood-press.png)",
             backgroundSize: "cover",
             backgroundPosition: "center"
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/85 to-charcoal" />
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/85 via-charcoal/80 to-charcoal" />
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-2/3"
+          style={{ background: "radial-gradient(70% 60% at 50% 0%, rgba(201,154,53,0.10), transparent 60%)" }}
+        />
 
-        <div className="container-luxury relative z-10 flex min-h-[70vh] flex-col justify-center text-center">
-          <motion.div
+        <div className="container-luxury relative z-10 text-center">
+          <motion.p
             className="eyebrow mx-auto"
             style={{ color: "var(--gold)" }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-          >
-            Health & Wellness
-          </motion.div>
-          <motion.h1
-            className="mt-6 headline-xl text-ivory"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 1 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            Nature's nutrition,{" "}
-            <em className="font-display italic text-gold">preserved.</em>
+            Why Choose RMS Gold?
+          </motion.p>
+
+          <motion.h1
+            className="mx-auto mt-8 max-w-4xl headline-xl text-ivory"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            Why Families Trust{" "}
+            <em className="font-display italic text-gold">RMS Gold</em>
           </motion.h1>
+
           <motion.p
-            className="mx-auto mt-6 max-w-xl body-lg-light"
+            className="mx-auto mt-7 max-w-xl font-display text-lg italic leading-relaxed text-ivory/55 md:text-xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+          >
+            Crafted with tradition. Protected by purity. Chosen for generations.
+          </motion.p>
+
+          <motion.div
+            className="mx-auto mt-10 flex justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
+            transition={{ delay: 0.6, duration: 0.9 }}
           >
-            Cold pressed oils retain what modern refining removes — aroma, color,
-            vitamins, and the honest character of every seed.
-          </motion.p>
+            <div className="divider-gold" />
+          </motion.div>
         </div>
       </section>
 
-      {/* ═══════════ BENEFITS ═══════════ */}
+      {/* ═══════════ REASON GRID ═══════════ */}
       <section className="section-luxury">
         <div className="container-luxury">
-          <SectionHeading
-            eyebrow="Benefits"
-            title="Why cold pressed oils matter."
-            copy="Understanding the science and tradition behind natural extraction."
-          />
+          <div className="mx-auto max-w-2xl text-center">
+            <RevealOnScroll>
+              <p className="eyebrow justify-center">The RMS Gold Difference</p>
+            </RevealOnScroll>
+            <RevealOnScroll delay={0.08}>
+              <h2 className="mt-5 headline-md text-forest">
+                Six reasons our oil belongs in your{" "}
+                <em className="font-display italic text-gold">family kitchen.</em>
+              </h2>
+            </RevealOnScroll>
+          </div>
 
           <div className="mx-auto mt-16 grid max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {benefits.map((b, i) => (
-              <RevealOnScroll key={b.title} delay={i * 0.05}>
+            {reasons.map((r, i) => (
+              <RevealOnScroll key={r.title} delay={i * 0.05}>
                 <div className="premium-card h-full p-8">
-                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gold/8">
-                    <b.icon className="text-gold" size={22} />
+                  <div className="grid h-14 w-14 place-items-center rounded-2xl bg-gold/8">
+                    <r.icon className="text-gold" size={24} />
                   </div>
-                  <h3 className="mt-6 font-serif text-xl text-forest">{b.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-charcoal/55">{b.copy}</p>
+                  <h3 className="mt-6 font-serif text-xl leading-snug text-forest">
+                    {r.title}
+                  </h3>
+                  <p className="mt-3.5 text-sm leading-7 text-charcoal/55">
+                    {r.copy}
+                  </p>
                 </div>
               </RevealOnScroll>
             ))}
           </div>
         </div>
-      </section>
-
-      {/* ═══════════ PARALLAX BREAK ═══════════ */}
-      <section className="container-luxury">
-        <ParallaxImage
-          src="/images/oil-pour.png"
-          alt="Golden oil being poured"
-          className="h-[40vh] rounded-2xl md:h-[55vh]"
-        />
       </section>
 
       {/* ═══════════ COLD PRESSED VS REFINED ═══════════ */}
       <section className="section-dark section-luxury">
         <div className="container-luxury">
-          <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
-            <div>
-              <Eyebrow light>Understanding the Difference</Eyebrow>
-              <RevealOnScroll>
-                <h2 className="mt-6 headline-lg text-ivory">
-                  Cold pressed vs.{" "}
-                  <em className="font-display italic text-gold">refined.</em>
-                </h2>
-              </RevealOnScroll>
-              <RevealOnScroll delay={0.1}>
-                <p className="mt-6 body-lg-light max-w-lg">
-                  Refined oils undergo chemical solvent extraction, high heat treatment,
-                  bleaching, and deodorizing — stripping away natural nutrients and character.
-                  Cold pressing uses only mechanical pressure at controlled temperatures,
-                  preserving everything nature intended.
-                </p>
-              </RevealOnScroll>
-
-              <RevealOnScroll delay={0.2}>
-                <div className="mt-10 grid gap-4 sm:grid-cols-2">
-                  {[
-                    ["Cold Pressed", ["Natural aroma", "Full nutrients", "No chemicals", "Traditional"]],
-                    ["Refined", ["Neutral taste", "Nutrients lost", "Solvents used", "Industrial"]]
-                  ].map(([title, items]) => (
-                    <div
-                      key={title as string}
-                      className={`rounded-2xl p-6 ${
-                        title === "Cold Pressed"
-                          ? "border border-gold/20 bg-gold/5"
-                          : "border border-ivory/6 bg-white/3"
-                      }`}
-                    >
-                      <h3 className={`font-serif text-lg ${
-                        title === "Cold Pressed" ? "text-gold" : "text-ivory/40"
-                      }`}>
-                        {title as string}
-                      </h3>
-                      <ul className="mt-4 space-y-2">
-                        {(items as string[]).map((item) => (
-                          <li key={item} className="text-sm text-ivory/45">• {item}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              </RevealOnScroll>
-            </div>
-
-            <RevealOnScroll direction="right">
-              <ParallaxImage
-                src="/images/wood-press.png"
-                alt="Traditional cold pressing"
-                className="h-[50vh] rounded-2xl"
-                speed={0.15}
-              />
+          <div className="mx-auto max-w-2xl text-center">
+            <RevealOnScroll>
+              <p className="eyebrow justify-center" style={{ color: "var(--gold)" }}>
+                The Honest Comparison
+              </p>
+            </RevealOnScroll>
+            <RevealOnScroll delay={0.08}>
+              <h2 className="mt-5 headline-lg text-ivory">
+                Cold Pressed vs.{" "}
+                <em className="font-display italic text-gold">Refined Oils</em>
+              </h2>
+            </RevealOnScroll>
+            <RevealOnScroll delay={0.14}>
+              <p className="mx-auto mt-5 max-w-lg body-lg-light">
+                The same seed, two very different journeys. See exactly what sets a
+                traditionally pressed oil apart from an industrially refined one.
+              </p>
             </RevealOnScroll>
           </div>
-        </div>
-      </section>
 
-      {/* ═══════════ OIL GUIDE TABLE ═══════════ */}
-      <section className="section-luxury section-cream">
-        <div className="container-luxury">
-          <SectionHeading
-            eyebrow="Oil Guide"
-            title="Choose the right oil for your need."
-          />
+          <RevealOnScroll delay={0.1} className="mx-auto mt-14 max-w-4xl">
+            <div className="compare-table">
+              {/* Header */}
+              <div className="hidden border-b border-gold/12 px-8 py-5 md:grid md:grid-cols-[1.1fr_1fr_1fr] md:gap-x-6">
+                <p className="text-[0.7rem] font-bold uppercase tracking-[0.2em] text-ivory/40">
+                  Comparison
+                </p>
+                <p className="text-[0.7rem] font-bold uppercase tracking-[0.2em] text-gold">
+                  RMS Gold · Cold Pressed
+                </p>
+                <p className="text-[0.7rem] font-bold uppercase tracking-[0.2em] text-ivory/40">
+                  Conventional Refined
+                </p>
+              </div>
 
-          <div className="mx-auto mt-16 max-w-5xl overflow-hidden rounded-2xl border border-forest/8 bg-white/70">
-            {/* Header */}
-            <div className="hidden border-b border-forest/8 bg-forest/3 px-8 py-4 md:grid md:grid-cols-4 md:gap-6">
-              {["Oil", "Best For", "Ayurveda", "Key Nutrients"].map((h) => (
-                <p key={h} className="text-xs font-bold uppercase tracking-widest text-forest/50">{h}</p>
+              {comparison.map(([attr, rms, refined]) => (
+                <div
+                  key={attr}
+                  className="compare-row grid gap-x-6 gap-y-3 border-b border-ivory/6 px-6 py-5 last:border-0 md:grid-cols-[1.1fr_1fr_1fr] md:items-center md:px-8"
+                >
+                  <p className="font-serif text-base text-ivory">{attr}</p>
+
+                  <div className="flex items-start gap-2.5">
+                    <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-gold/15">
+                      <Check size={12} className="text-gold" />
+                    </span>
+                    <div>
+                      <span className="mb-0.5 block text-[0.6rem] font-bold uppercase tracking-widest text-gold/70 md:hidden">
+                        RMS Gold
+                      </span>
+                      <span className="text-sm leading-6 text-ivory/80">{rms}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2.5">
+                    <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-ivory/8">
+                      <X size={12} className="text-ivory/30" />
+                    </span>
+                    <div>
+                      <span className="mb-0.5 block text-[0.6rem] font-bold uppercase tracking-widest text-ivory/30 md:hidden">
+                        Refined
+                      </span>
+                      <span className="text-sm leading-6 text-ivory/45">{refined}</span>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
-
-            {oilGuide.map((row, i) => (
-              <RevealOnScroll key={row.oil} delay={i * 0.05}>
-                <div className="grid gap-3 border-b border-forest/6 px-8 py-6 last:border-0 md:grid-cols-4 md:gap-6">
-                  <p className="font-serif text-lg font-semibold text-forest">{row.oil}</p>
-                  <p className="text-sm text-charcoal/55">{row.best}</p>
-                  <p className="text-sm italic text-charcoal/45">{row.ayurveda}</p>
-                  <p className="text-sm text-charcoal/55">{row.nutrition}</p>
-                </div>
-              </RevealOnScroll>
-            ))}
-          </div>
+          </RevealOnScroll>
         </div>
       </section>
 
-      {/* ═══════════ CTA ═══════════ */}
-      <section className="section-luxury">
+      {/* ═══════════ TRUST INDICATORS ═══════════ */}
+      <section className="section-luxury section-cream">
         <div className="container-luxury">
           <div className="mx-auto max-w-3xl text-center">
             <RevealOnScroll>
               <GoldDivider />
             </RevealOnScroll>
-            <RevealOnScroll delay={0.1}>
+            <RevealOnScroll delay={0.08}>
               <h2 className="mt-8 headline-md text-forest">
-                Nourish your family with{" "}
-                <em className="font-display italic text-gold">nature's best.</em>
+                A promise you can{" "}
+                <em className="font-display italic text-gold">taste and trust.</em>
               </h2>
             </RevealOnScroll>
-            <RevealOnScroll delay={0.2}>
-              <div className="mt-10 flex flex-wrap justify-center gap-4">
-                <CtaLink to="/products" variant="primary">Explore oils</CtaLink>
-                <CtaLink to="/blog" variant="outline">Read journal</CtaLink>
-              </div>
+            <RevealOnScroll delay={0.14}>
+              <p className="mx-auto mt-5 max-w-lg body-lg">
+                Every bottle of RMS Gold carries the same standard of purity,
+                freshness, and heritage — held to the values below, without exception.
+              </p>
             </RevealOnScroll>
           </div>
+
+          <RevealOnScroll delay={0.1}>
+            <div className="mx-auto mt-12 flex max-w-3xl flex-wrap justify-center gap-3.5">
+              {trustBadges.map((badge) => (
+                <span key={badge} className="trust-pill">
+                  <span className="trust-dot" />
+                  {badge}
+                </span>
+              ))}
+            </div>
+          </RevealOnScroll>
+
+          <RevealOnScroll delay={0.2}>
+            <div className="mt-14 flex flex-wrap justify-center gap-4">
+              <CtaLink to="/products" variant="primary">Explore the collection</CtaLink>
+              <CtaLink to="/our-story" variant="outline">Our heritage</CtaLink>
+            </div>
+          </RevealOnScroll>
         </div>
       </section>
     </PageShell>

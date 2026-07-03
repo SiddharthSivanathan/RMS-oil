@@ -54,48 +54,115 @@ export function Story() {
         keywords={["Traditional Oil", "Wood Pressed Oil", "Oil Manufacturer Tamil Nadu", "Cold Pressed Heritage"]}
       />
 
-      {/* ═══════════ HERO ═══════════ */}
-      <section className="relative min-h-[80vh] overflow-hidden bg-charcoal">
+      {/* ═══════════ OUR STORY — HERITAGE ═══════════ */}
+      <section className="story-heritage flex min-h-screen items-center py-24 md:py-32">
         <div
-          className="absolute inset-0 opacity-25"
-          style={{
-            backgroundImage: "url(/images/wood-press.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center"
-          }}
+          className="story-heritage-bg"
+          style={{ backgroundImage: "url(/images/wood-press.png)" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/70 to-charcoal" />
+        <div className="story-heritage-overlay" />
 
-        <div className="container-luxury relative z-10 flex min-h-[80vh] flex-col justify-center">
-          <div className="max-w-3xl">
-            <motion.div
+        <div className="container-luxury relative z-10">
+          <div className="mx-auto max-w-3xl text-center">
+            {/* Eyebrow */}
+            <motion.p
               className="eyebrow"
               style={{ color: "var(--gold)" }}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
               Our Story
+            </motion.p>
+
+            {/* Ornamental motif */}
+            <motion.div
+              className="story-ornament mt-8"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.25, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <span className="story-ornament-line" />
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+                aria-hidden="true"
+              >
+                <path d="M12 2 L14.4 9.6 L22 12 L14.4 14.4 L12 22 L9.6 14.4 L2 12 L9.6 9.6 Z" />
+                <circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none" />
+              </svg>
+              <span className="story-ornament-line" />
             </motion.div>
+
+            {/* Headline */}
             <motion.h1
               className="mt-8 headline-xl text-ivory"
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 34 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ delay: 0.35, duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
-              A mill tradition,{" "}
-              <em className="font-display italic text-gold">bottled for modern living.</em>
+              Before machines measured speed,{" "}
+              <em className="font-display italic text-gold">
+                our ancestors measured patience.
+              </em>
             </motion.h1>
+
+            {/* Opening narrative */}
             <motion.p
-              className="mt-8 body-lg-light max-w-xl"
+              className="mx-auto mt-10 max-w-2xl body-lg-light"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
             >
-              RMS Gold is not an industrial label. It is a product-first brand built on the
-              quiet confidence of Manimaran Oil Mill — purity, patient craft, and oils
-              that families recognize by aroma.
+              Long before steel and steam, there was the slow turn of the wooden{" "}
+              <span className="text-gold">Chekku</span> — a gentle giant of stone
+              and timber that coaxed oil from seed without haste or heat. Beneath
+              its quiet rhythm, every seed surrendered its{" "}
+              <span className="text-gold">purest essence</span>, drop by unhurried
+              drop.
             </motion.p>
+          </div>
+
+          {/* Heritage pull-quote */}
+          <RevealOnScroll className="mx-auto mt-16 max-w-2xl">
+            <blockquote className="story-quote">
+              <p className="font-display text-xl italic leading-relaxed text-ivory/80 md:text-2xl md:leading-relaxed">
+                What began as a family tradition has become a promise carried
+                through generations — a promise to preserve nature's purity,
+                authentic flavour, and honest nutrition.
+              </p>
+            </blockquote>
+          </RevealOnScroll>
+
+          {/* Closing narrative */}
+          <div className="mx-auto mt-16 max-w-2xl text-center">
+            <RevealOnScroll delay={0.05}>
+              <p className="body-lg-light">
+                That knowledge was never written down. It lived in the hands of
+                our elders, in the patience of the press, in a quiet reverence for{" "}
+                <span className="text-gold">seed, soil and season</span> — passed
+                from one generation to the next, for some things are far too
+                precious to hurry.
+              </p>
+            </RevealOnScroll>
+            <RevealOnScroll delay={0.1}>
+              <p className="mt-6 body-lg-light">
+                Today, <span className="text-gold">RMS Gold</span> carries that
+                same wood-pressed soul into modern homes. We still choose patience
+                over speed, purity over shortcuts, and craft over convenience — so
+                that every bottle you open holds the honest aroma of a{" "}
+                <span className="text-gold">heritage kept whole.</span>
+              </p>
+            </RevealOnScroll>
+            <RevealOnScroll delay={0.15}>
+              <p className="mt-10 font-display text-[0.8125rem] uppercase tracking-[0.28em] text-gold/70">
+                Woven from the traditions of Manimaran Oil Mill
+              </p>
+            </RevealOnScroll>
           </div>
         </div>
       </section>

@@ -1,12 +1,11 @@
 import { useEffect } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Lenis from "lenis";
 import { AnimatePresence } from "framer-motion";
 import { Layout } from "./components/Layout";
 import { Home } from "./pages/Home";
 import { Products } from "./pages/Products";
 import { Story } from "./pages/Story";
-import { Journey } from "./pages/Journey";
 import { Wellness } from "./pages/Wellness";
 import { Reviews } from "./pages/Reviews";
 import { WriteReview } from "./pages/WriteReview";
@@ -44,7 +43,11 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/our-story" element={<Story />} />
-          <Route path="/manufacturing-journey" element={<Journey />} />
+          {/* Permanent redirect — Manufacturing Journey page was retired */}
+          <Route
+            path="/manufacturing-journey"
+            element={<Navigate to="/our-story" replace />}
+          />
           <Route path="/health-wellness" element={<Wellness />} />
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/write-review" element={<WriteReview />} />
